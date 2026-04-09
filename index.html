@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sohan Bhowmik - Dev Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Mineral Jewel Tones Palette */
+            --bg-midnight: #0a0f1e;
+            --text-silver: #e2e8f0;
+            --text-muted: #94a3b8;
+            
+            --gem-amethyst: #a78bfa; 
+            --gem-emerald: #34d399;   
+            --gem-sapphire: #60a5fa;  
+            
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-midnight);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(167, 139, 250, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(52, 211, 153, 0.15) 0%, transparent 40%);
+            background-size: 100% 100%;
+            animation: backgroundShift 20s ease infinite;
+
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-silver);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes backgroundShift {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes orbit {
+            0% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- CONTAINER & GLASS PANELS --- */
+        .portfolio-container {
+            width: 100%;
+            max-width: 900px;
+            z-index: 10;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: popIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.5s; }
+        .delay-4 { animation-delay: 0.7s; }
+        .delay-5 { animation-delay: 0.9s; }
+
+        /* --- TYPOGRAPHY --- */
+        h1 {
+            font-size: 3.5rem;
+            margin: 0 0 10px 0;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--text-silver), var(--gem-sapphire), var(--gem-amethyst));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--gem-emerald);
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 15px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: var(--text-silver);
+            margin: 0 0 10px 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 25px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .avatar {
+            background: linear-gradient(135deg, var(--gem-amethyst), var(--gem-sapphire));
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden; /* Ensures the image stays within the circle */
+            position: relative;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Keeps aspect ratio and fills the circle */
+            display: block;
+        }
+
+        .companion-avatar {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 38px;
+            margin-top: -19px;
+            margin-left: -19px;
+            animation: orbit 8s linear infinite;
+            filter: drop-shadow(0 0 15px rgba(52, 211, 153, 0.6));
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            cursor: pointer;
+            word-break: break-all;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--gem-sapphire), #81b9ff);
+            color: var(--bg-midnight);
+            box-shadow: 0 5px 15px rgba(96, 165, 250, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(96, 165, 250, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--gem-amethyst);
+            border: 2px solid var(--gem-amethyst);
+        }
+
+        .btn-outline:hover {
+            background: rgba(167, 139, 250, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(167, 139, 250, 0.2);
+        }
+
+        /* --- PORTFOLIO / CASE STUDIES --- */
+        .case-study {
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 25px;
+            transition: all 0.5s ease;
+        }
+
+        .case-study:hover {
+            border-color: rgba(52, 211, 153, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 650px) {
+            .case-grid { grid-template-columns: 1fr 1fr 1fr; }
+        }
+
+        .case-section h4 {
+            color: var(--gem-emerald);
+            margin: 0 0 5px 0;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .case-section p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* --- ABOUT ME --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .skill-pill {
+            background: rgba(167, 139, 250, 0.08);
+            color: var(--gem-amethyst);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            padding: 9px 18px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .exp-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 25px;
+        }
+
+        .exp-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--gem-sapphire);
+            box-shadow: 0 0 15px var(--gem-sapphire);
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonial {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-silver);
+            position: relative;
+            padding: 20px 40px;
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 4rem;
+            color: rgba(167, 139, 250, 0.2);
+            font-family: serif;
+        }
+        
+        .testimonial-author {
+            margin-top: 15px;
+            color: var(--gem-emerald);
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        /* --- CONTACT & CTA --- */
+        .cta-section {
+            text-align: center;
+        }
+
+        .cta-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="portfolio-container">
+        
+        <header class="glass-panel delay-1 hero-section">
+            <div class="avatar-wrapper">
+                <div class="avatar">
+                    <img src="image_ac3941.jpg" alt="Sohan Bhowmik" class="profile-img">
+                </div>
+                <div class="companion-avatar">🚀</div>
+            </div>
+            <h1>Hi, I'm Sohan Bhowmik.</h1>
+            <div class="subtitle">Software Developer | Bridging wild ideas with functional engineering.</div>
+            <p>I build intuitive web experiences, automate workflows, and solve complex logic puzzles. Currently studying at Vellore Institute of Technology.</p>
+            
+            <div class="hero-buttons">
+                <a href="#portfolio" class="btn btn-primary">View My Work</a>
+            </div>
+        </header>
+
+        <section id="portfolio" class="glass-panel delay-2">
+            <h2>💻 Curated Work</h2>
+            
+            <div class="case-study">
+                <h3>🌍 Disaster Management System</h3>
+                <div class="case-grid">
+                    <div class="case-section">
+                        <h4>The Problem</h4>
+                        <p>During emergencies, first responders lack immediate, centralized, and visually mapped data to act quickly.</p>
+                    </div>
+                    <div class="case-section">
+                        <h4>The Process</h4>
+                        <p>Engineered a real-time mapping interface using modern APIs to aggregate and categorize emergency signals.</p>
+                    </div>
+                    <div class="case-section">
+                        <h4>The Result</h4>
+                        <p>A functional dashboard that instantly detects and maps disaster types, optimizing critical response times.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="case-study">
+                <h3>📧 Inbox Organizer AI</h3>
+                <div class="case-grid">
+                    <div class="case-section">
+                        <h4>The Problem</h4>
+                        <p>Professionals lose hours manually sifting through email clutter to find crucial dates and action items.</p>
+                    </div>
+                    <div class="case-section">
+                        <h4>The Process</h4>
+                        <p>Built an automated data-extraction workflow to identify and pull key metrics and deadlines from raw text.</p>
+                    </div>
+                    <div class="case-section">
+                        <h4>The Result</h4>
+                        <p>Automatically syncs extracted notes directly into personal calendars, saving users hours of manual entry.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="glass-panel delay-3">
+            <h2>🧑‍🚀 About Me</h2>
+            <p>I'm a passionate developer fueled by late-night coding sessions and an endless curiosity for how things work under the hood. Beyond the screen, I'm driven by a desire to build accessible tools that actually matter to people.</p>
+            <p>When I'm not battling algorithms or debugging at VIT, you can find me exploring new UI trends, contributing to open-source discussions, or enjoying a good game of chess.</p>
+            
+            <h3 style="margin-top: 30px; color: var(--gem-amethyst); font-size: 1.1rem;">Technical Arsenal</h3>
+            <div class="skills-container" style="margin-bottom: 30px;">
+                <div class="skill-pill">Full-Stack Development</div>
+                <div class="skill-pill">API Integration</div>
+                <div class="skill-pill">Data Structures</div>
+                <div class="skill-pill">Automation Logic</div>
+            </div>
+
+            <h3 style="color: var(--gem-amethyst); font-size: 1.1rem;">Experience & Hackathons</h3>
+            <div class="exp-item">
+                <strong style="color: var(--text-silver);">DevJams Hackathon</strong>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Built custom internal tools, mastering debugging under tight deadlines.</p>
+            </div>
+            <div class="exp-item">
+                <strong style="color: var(--text-silver);">Campus Coding Club</strong>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Collaborative peer programming and advanced algorithm challenges.</p>
+            </div>
+            <div class="exp-item">
+                <strong style="color: var(--text-silver);">C2C Hackathon</strong>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Rapid prototyping and shipping MVPs in a highly competitive environment.</p>
+            </div>
+        </section>
+
+        <section class="glass-panel delay-4">
+            <h2>💬 Word on the Street</h2>
+            <div class="testimonial">
+                Sohan is an incredible problem solver. During our last hackathon, he managed to bridge our wild ideas with actual functional engineering, keeping the team anchored while delivering an amazing product under pressure.
+                <div class="testimonial-author">— Teammate, DevJams Hackathon</div>
+            </div>
+        </section>
+
+        <section id="contact" class="glass-panel delay-5 cta-section">
+            <h2>Let's Build Something Together</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 10px;">I'm currently open for freelance opportunities, internships, and collaborative projects.</p>
+            <p style="color: var(--text-muted);">Have a project in mind or just want to say hi? My inbox is always open.</p>
+            
+            <div class="cta-links">
+                <a href="mailto:sohan.bhowmik2025@vitstudent.ac.in" class="btn btn-primary">✉️ sohan.bhowmik2025@vitstudent.ac.in</a>
+                <a href="https://www.linkedin.com/in/sohan-bhowmik-6302423bb/" target="_blank" class="btn btn-outline">LinkedIn</a>
+                <a href="https://github.com/sohanbhowmik" target="_blank" class="btn btn-outline">GitHub</a>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>
